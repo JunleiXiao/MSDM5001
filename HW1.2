@@ -1,0 +1,20 @@
+#!/bin/bash
+mkdir MSDMHW1
+cd MSDMHW1
+
+antime_s=$(date +%s -d "1970-01-01 00:00:00")
+for dir in {0..99}
+do
+        no=$((dir+1))
+        mkdir DDM$no
+        cd DDM$no
+        echo "nanoseconds since 1970-01-01 00:00:00 UTC" > time_till_now.txt
+        curtime=$(date "+%Y-%m-%d %H:%M:%S")
+        #this OS shows the time of UTC-07, so the curtime should + 7 hours in UTC
+        curtime_s=$(($(date +%s -d "$curtime") + 7*60*60))
+        dtime_s=$(($curtime_s - $antime_s))
+        nano=$(date +%N)
+        echo -n "<" $dtime_s$nano ">" >> time_till_now.txt
+        cd ..
+done
+cd ..
