@@ -1,0 +1,2 @@
+#!/bin/bash
+more blocklist.xml | grep --color "id=\".\{1,\}@.*" | grep -v 'id=.*[\,/,^].*'
